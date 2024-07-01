@@ -1,18 +1,46 @@
 package com.mattias.plushies_plus;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
+import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 
 public class PlushiesPlusFabric implements ModInitializer {
     
     @Override
     public void onInitialize() {
-        
-        // This method is invoked by the Fabric mod loader when it is ready
-        // to load your mod. You can access Fabric and Common code in this
-        // project.
-
-        // Use Fabric to bootstrap the Common mod.
-        Constants.LOG.info("Hello Fabric world!");
         PlushiesPlus.init();
+
+        registerAll();
     }
+
+    public static final Block ZOMBIE_PLUSHIE = registerBlock("zombie_plushie", new Block(FabricBlockSettings.copyOf(Blocks.WHITE_WOOL).noOcclusion()));
+
+    public static final CreativeModeTab PLUSHIES_PLUS_TAB = Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB,
+            new ResourceLocation(Constants.MOD_ID, "plushies_plus"),
+            FabricItemGroup.builder().title(Component.translatable("itemGroup.plushiesPlus"))
+                    .icon(() -> new ItemStack(ZOMBIE_PLUSHIE)).displayItems((displayContext, entries) -> {
+                        entries.accept(ZOMBIE_PLUSHIE);
+                    }).build());
+
+    private static Block registerBlock(String name, Block block) {
+        registerBlockItem(name, block);
+        return Registry.register(BuiltInRegistries.BLOCK, new ResourceLocation(Constants.MOD_ID, name), block);
+    }
+    private static Item registerBlockItem(String name, Block block) {
+        return Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(Constants.MOD_ID, name),
+                new BlockItem(block, new FabricItemSettings()));
+    }
+
+    public static void registerAll() {}
 }
