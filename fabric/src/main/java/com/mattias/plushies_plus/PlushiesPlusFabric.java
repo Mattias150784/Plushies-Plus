@@ -1,5 +1,6 @@
 package com.mattias.plushies_plus;
 
+import com.mattias.plushies_plus.core.block.StandingZombiePlushieBlock;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -24,7 +25,12 @@ public class PlushiesPlusFabric implements ModInitializer {
         registerAll();
     }
 
-    public static final Block ZOMBIE_PLUSHIE = registerBlock("zombie_plushie", new Block(FabricBlockSettings.copyOf(Blocks.WHITE_WOOL).noOcclusion()));
+    public static final Block ZOMBIE_PLUSHIE = registerBlock("zombie_plushie",
+            new StandingZombiePlushieBlock(FabricBlockSettings
+                    .copyOf(Blocks.WHITE_WOOL)
+                    .noOcclusion()
+                    .lightLevel(light -> {return 1;})
+            ));
 
     public static final CreativeModeTab PLUSHIES_PLUS_TAB = Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB,
             new ResourceLocation(Constants.MOD_ID, "plushies_plus"),
