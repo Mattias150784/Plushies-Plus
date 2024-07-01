@@ -1,8 +1,8 @@
-package com.example.examplemod;
+package com.mattias.plushies_plus;
 
 import net.fabricmc.api.ModInitializer;
 
-public class ExampleMod implements ModInitializer {
+public class PlushiesPlusFabric implements ModInitializer {
     
     @Override
     public void onInitialize() {
@@ -13,6 +13,6 @@ public class ExampleMod implements ModInitializer {
 
         // Use Fabric to bootstrap the Common mod.
         Constants.LOG.info("Hello Fabric world!");
-        CommonClass.init();
+        PlushiesPlus.init();
     }
 }

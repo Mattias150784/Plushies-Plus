@@ -1,6 +1,6 @@
-package com.example.examplemod.platform;
+package com.mattias.plushies_plus.platform;
 
-import com.example.examplemod.platform.services.IPlatformHelper;
+import com.mattias.plushies_plus.platform.services.IPlatformHelper;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLLoader;
 

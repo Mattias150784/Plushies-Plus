@@ -1,4 +1,4 @@
-package com.example.examplemod.platform.services;
+package com.mattias.plushies_plus.platform.services;
 
 public interface IPlatformHelper {
 

@@ -1,16 +1,12 @@
 {
     "required": true,
     "minVersion": "0.8",
-    "package": "com.example.examplemod.mixin",
+    "package": "com.mattias.plushies_plus.mixin",
     "refmap": "${mod_id}.refmap.json",
     "compatibilityLevel": "JAVA_17",
-    "mixins": [
-    ],
-    "client": [
-        "MixinTitleScreen"
-    ],
-    "server": [
-    ],
+    "mixins": [],
+    "client": [],
+    "server": [],
     "injectors": {
       "defaultRequire": 1
     }

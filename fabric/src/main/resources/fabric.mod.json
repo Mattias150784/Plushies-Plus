@@ -1,6 +1,6 @@
 {
     "schemaVersion": 1,
-    "id": "mod_id",
+    "id": "plushies_plus",
     "version": "${version}",
     "name": "${mod_name}",
     "description": "${description}",
@@ -16,7 +16,10 @@
     "environment": "*",
     "entrypoints": {
         "main": [
-            "com.example.examplemod.ExampleMod"
+          "com.mattias.plushies_plus.PlushiesPlusFabric"
+        ],
+        "client": [
+            "com.mattias.plushies_plus.PlushiesPlusFabricClient"
         ]
     },
     "mixins": [
