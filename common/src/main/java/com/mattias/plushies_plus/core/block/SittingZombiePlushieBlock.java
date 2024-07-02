@@ -11,12 +11,13 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class SittingZombiePlushieBlock extends Block {
-
+    public static final DirectionProperty FACING;
     private static final VoxelShape SHAPE = Block.box(6.0D, 0.0D, 7.0D, 9.0D, 12.0D, 8.0D);
 
     public SittingZombiePlushieBlock(Properties $$0) {
