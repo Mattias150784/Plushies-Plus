@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=north": {
       "model": "plushies_plus:block/zombie_plushie"
+    },
+    "facing=east": {
+      "model": "plushies_plus:block/zombie_plushie",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "plushies_plus:block/zombie_plushie",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "plushies_plus:block/zombie_plushie",
+      "y": 270
     }
   }
 }

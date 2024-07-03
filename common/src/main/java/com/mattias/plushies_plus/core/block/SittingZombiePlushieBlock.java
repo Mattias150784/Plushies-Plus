@@ -32,40 +32,39 @@ public class SittingZombiePlushieBlock extends Block {
         super($$0);
         this.registerDefaultState((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.NORTH)));
     }
+
     @Override
-    public BlockState rotate(BlockState p_48722_, Rotation p_48723_) {
-        return (BlockState)p_48722_.setValue(FACING, p_48723_.rotate((Direction)p_48722_.getValue(FACING)));
+    public BlockState rotate(BlockState blockstate, Rotation rotation) {
+        return (BlockState)blockstate.setValue(FACING, rotation.rotate((Direction)blockstate.getValue(FACING)));
     }
 
     @Override
-    public BlockState mirror(BlockState p_48719_, Mirror p_48720_) {
-        return p_48719_.rotate(p_48720_.getRotation((Direction)p_48719_.getValue(FACING)));
+    public BlockState mirror(BlockState state, Mirror mirror) {
+        return state.rotate(mirror.getRotation((Direction)state.getValue(FACING)));
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> p_48725_) {
-        p_48725_.add(new Property[]{FACING});
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> definition) {
+        definition.add(new Property[]{FACING});
     }
 
     @Override
-    public BlockState getStateForPlacement(BlockPlaceContext p_48689_) {
-        return (BlockState)this.defaultBlockState().setValue(FACING, p_48689_.getHorizontalDirection().getOpposite());
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return (BlockState)this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
-
     @Override
-    public VoxelShape getShape(BlockState $$0, BlockGetter $$1, BlockPos $$2, CollisionContext $$3) {
+    public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
         return SHAPE;
     }
 
     public static void handleServerInteraction (ServerLevel level, BlockPos pos) {
-                level.playSound(null, pos, SoundEvents.ZOMBIE_AMBIENT, SoundSource.PLAYERS);
-
+        level.playSound(null, pos, SoundEvents.ZOMBIE_AMBIENT, SoundSource.PLAYERS);
     }
 
-
     @Override
-    public InteractionResult use(BlockState $$0, Level level, BlockPos pos, Player $$3, InteractionHand $$4, BlockHitResult $$5) {
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+
         if (!level.isClientSide()) {
             handleServerInteraction((ServerLevel) level, pos);
         }
