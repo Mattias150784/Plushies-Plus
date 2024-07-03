@@ -3,7 +3,7 @@ package com.mattias.plushies_plus.core.block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -18,19 +18,31 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class SittingZombiePlushieBlock extends Block {
+import javax.annotation.Nullable;
+
+public class PlushieBlock extends Block {
+
+    public static final IntegerProperty POSE = IntegerProperty.create("pose", 0, 1); // 1 -> second pose
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-                                                    //X1 Y1 Z1 X2 Y2 Z2
     private static final VoxelShape SHAPE = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 8.0D, 12.0D);
 
-    public SittingZombiePlushieBlock(Properties $$0) {
-        super($$0);
+    private @Nullable SoundEvent interactionSound = null;
+
+//    public PlushieBlock(Properties properties) {
+//        super(properties);
+//        this.registerDefaultState((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.NORTH)));
+//    }
+
+    public PlushieBlock(@Nullable SoundEvent interactionSound, Properties properties) {
+        super(properties);
         this.registerDefaultState((BlockState)((BlockState)((BlockState)this.stateDefinition.any()).setValue(FACING, Direction.NORTH)));
+        this.interactionSound = interactionSound;
     }
 
     @Override
@@ -58,15 +70,15 @@ public class SittingZombiePlushieBlock extends Block {
         return SHAPE;
     }
 
-    public static void handleServerInteraction (ServerLevel level, BlockPos pos) {
-        level.playSound(null, pos, SoundEvents.ZOMBIE_AMBIENT, SoundSource.PLAYERS);
+    public static void playSoundAtServerLevelPosition(ServerLevel level, BlockPos pos, SoundEvent sound) {
+        level.playSound(null, pos, sound, SoundSource.BLOCKS);
     }
 
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
 
-        if (!level.isClientSide()) {
-            handleServerInteraction((ServerLevel) level, pos);
+        if (!level.isClientSide() && this.interactionSound != null) {
+            playSoundAtServerLevelPosition((ServerLevel) level, pos, this.interactionSound);
         }
 
        return InteractionResult.SUCCESS;
