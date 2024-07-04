@@ -1,18 +1,18 @@
 {
   "variants": {
     "facing=north,pose=0": {
-      "model": "plushies_plus:block/zombie_plushie"
+      "model": "plushies_plus:block/sitting_center_zombie_plushie"
     },
     "facing=east,pose=0": {
-      "model": "plushies_plus:block/zombie_plushie",
+      "model": "plushies_plus:block/sitting_center_zombie_plushie",
       "y": 90
     },
     "facing=south,pose=0": {
-      "model": "plushies_plus:block/zombie_plushie",
+      "model": "plushies_plus:block/sitting_center_zombie_plushie",
       "y": 180
     },
     "facing=west,pose=0": {
-      "model": "plushies_plus:block/zombie_plushie",
+      "model": "plushies_plus:block/sitting_center_zombie_plushie",
       "y": 270
     },
     "facing=north,pose=1": {

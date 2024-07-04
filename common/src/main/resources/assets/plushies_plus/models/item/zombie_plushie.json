@@ -1,3 +1,22 @@
 {
-  "parent": "plushies_plus:block/zombie_plushie"
+  "parent": "plushies_plus:block/sitting_center_zombie_plushie",
+  "display": {
+    "gui": {
+      "rotation": [
+        15,
+        180,
+        0
+      ],
+      "translation": [
+        0,
+        2,
+        0
+      ],
+      "scale": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  }
 }
