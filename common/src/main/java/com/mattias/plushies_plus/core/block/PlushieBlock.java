@@ -43,13 +43,22 @@ public class PlushieBlock extends Block {
     };
 
     private @Nullable SoundEvent interactionSound = null;
+    private @Nullable SoundEvent playerDestroySound = null;
 
-    public PlushieBlock(@Nullable SoundEvent interactionSound, Properties properties) {
+    public PlushieBlock(@Nullable SoundEvent interactionSound, @Nullable SoundEvent playerDestroySound, Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(POSE, 0));
         this.interactionSound = interactionSound;
+        this.playerDestroySound = playerDestroySound;
+    }
+
+    @Override
+    public void playerWillDestroy(Level $$0, BlockPos $$1, BlockState $$2, Player $$3) {
+        if (!$$0.isClientSide()) {
+            playSoundAtServerLevelPosition((ServerLevel) $$0, $$1, this.playerDestroySound);
+        }
     }
 
     @Override
@@ -82,7 +91,13 @@ public class PlushieBlock extends Block {
 
     @Override
     public BlockState updateShape(BlockState $$0, Direction $$1, BlockState $$2, LevelAccessor $$3, BlockPos $$4, BlockPos $$5) {
-        return $$1 == Direction.DOWN && !$$0.canSurvive($$3, $$4) ? Blocks.AIR.defaultBlockState() : super.updateShape($$0, $$1, $$2, $$3, $$4, $$5);
+
+        if ($$1 == Direction.DOWN && !$$0.canSurvive($$3, $$4)) {
+            return Blocks.AIR.defaultBlockState();
+        }
+        else {
+            return super.updateShape($$0, $$1, $$2, $$3, $$4, $$5);
+        }
     }
 
     @Override

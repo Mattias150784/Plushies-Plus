@@ -16,7 +16,7 @@ import net.minecraft.world.level.material.PushReaction;
 
 public class PlushieBlocksFabric {
 
-    public static final Block ZOMBIE_PLUSHIE = registerBlock("zombie_plushie", new PlushieBlock(SoundEvents.ZOMBIE_AMBIENT, BlockBehaviour.Properties.of().strength(0.5F).noOcclusion().sound(SoundType.WOOL).ignitedByLava().forceSolidOn().pushReaction(PushReaction.DESTROY)));
+    public static final Block ZOMBIE_PLUSHIE = registerBlock("zombie_plushie", new PlushieBlock(SoundEvents.ZOMBIE_AMBIENT, PlushieSoundsFabric.SQUEAK, BlockBehaviour.Properties.of().strength(0.5F).noOcclusion().sound(SoundType.WOOL).ignitedByLava().forceSolidOn().pushReaction(PushReaction.DESTROY)));
 
     private static Block registerBlock(String name, Block block) {
         registerBlockItem(name, block);
