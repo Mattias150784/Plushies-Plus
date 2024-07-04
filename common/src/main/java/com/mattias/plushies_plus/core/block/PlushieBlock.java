@@ -33,9 +33,14 @@ public class PlushieBlock extends Block {
     public static final int POSE_LIMIT = TOTAL_POSES - 1;
 
      public static final IntegerProperty POSE = IntegerProperty.create("pose", 0, POSE_LIMIT); // 1 -> second pose
-//    public static final IntegerProperty POSE = BlockStateProperties.AGE_1; // exactly the same function as the above comment
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
-    private static final VoxelShape SHAPE = Block.box(4.0D, 0.0D, 4.0D, 12.0D, 8.0D, 12.0D);
+
+    protected static final VoxelShape[] SHAPE_BY_POSE = new VoxelShape[]{
+            // index 0 / pose 1
+            Block.box(4.0D, 0.0D, 4.0D, 12.0D, 8.0D, 12.0D),
+            // index 1, pose 2
+            Block.box(4.0D, 0.0D, 0.0D, 12.0D, 8.0D, 8.0D)
+    };
 
     private @Nullable SoundEvent interactionSound = null;
 
@@ -72,7 +77,7 @@ public class PlushieBlock extends Block {
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter getter, BlockPos pos, CollisionContext context) {
-        return SHAPE;
+        return SHAPE_BY_POSE[state.getValue(POSE)];
     }
 
     @Override
